@@ -73,6 +73,7 @@ job = Queue()
 def jalan(q):
   while not q.empty():
     targ = q.get()
+    redup(targ)
     q.task_done()
 
 if len(sys.argv) != 3:

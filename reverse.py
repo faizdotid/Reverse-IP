@@ -7,6 +7,7 @@ import sys
 import time
 from threading import Thread
 import os
+from queue import Queue
 
 try:
   os.mkdir('result')
@@ -67,10 +68,22 @@ def redup(ip):
   except:
     pass
 
-if len(sys.argv) != 2:
-  print('Usage : python3 {} ips.txt'.format(sys.argv[0]))
+job = Queue()
+
+def jalan(q):
+  while not q.empty():
+    targ = q.get()
+    q.task_done()
+
+if len(sys.argv) != 3:
+  print('Usage : python3 {} ips.txt threads'.format(sys.argv[0]))
 else:
-  tar = open(sys.argv[1], 'r').read().split('\n')
-  for targ in tar:
-    t = Thread(target=redup, args=(targ,))
-    t.start()
+  for tt in open(sys.argv[1], 'r').read().split('\n'):
+    job.put(tt)
+
+for i in range(int(sys.argv[2])):
+  t = Thread(target=jalan, args=(job,))
+  t.start()
+
+job.join()
+  

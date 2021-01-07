@@ -30,7 +30,7 @@ def revip(ip):
   apiUrl = 'https://api.hackertarget.com/reverseiplookup/?q='+ip
   head = {'User-Agent': 'Mozzila'}
   try:
-    request = requests.get(apiUrl, proxies=proxy, headers=head, timeout=70)
+    request = requests.get(apiUrl, proxies=proxy, headers=head, timeout=14)
     if 'No DNS' in request.text:
       print('[-] Wrong IP Format [-]')
     elif 'API count' in request.text:

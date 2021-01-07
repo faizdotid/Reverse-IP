@@ -5,7 +5,7 @@ from proxyscrape import create_collector
 collector = create_collector('my-collector', ['https', 'socks5', 'socks4'])
 import sys
 import time
-from concurrent.futures import ThreadPoolExecutor
+from threading import Thread
 import os
 
 try:
@@ -72,5 +72,5 @@ if len(sys.argv) != 2:
 else:
   tar = open(sys.argv[1], 'r').read().split('\n')
   for targ in tar:
-    with ThreadPoolExecutor(max_workers=25) as run:
-      run.submit(redup, targ)
+    t = Thread(target=redup, args=(targ,))
+    t.start()

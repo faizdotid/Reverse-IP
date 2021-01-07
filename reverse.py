@@ -72,5 +72,5 @@ if len(sys.argv) != 2:
 else:
   tar = open(sys.argv[1], 'r').read().split('\n')
   for targ in tar:
-    with ThreadPoolExecutor(max_workers=15) as run:
+    with ThreadPoolExecutor(max_workers=25) as run:
       run.submit(redup, targ)

@@ -81,10 +81,9 @@ if len(sys.argv) != 3:
 else:
   for tt in open(sys.argv[1], 'r').read().split('\n'):
     job.put(tt)
-
-for i in range(int(sys.argv[2])):
-  t = Thread(target=jalan, args=(job,))
-  t.start()
+  for i in range(int(sys.argv[2])):
+    t = Thread(target=jalan, args=(job,))
+    t.start()
 
 job.join()
   

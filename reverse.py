@@ -2,7 +2,7 @@
 
 import requests
 from proxyscrape import create_collector
-collector = create_collector('my-collector', ['https', 'socks5', 'socks4'])
+collector = create_collector('my-collector', ['http', 'https', 'socks5', 'socks4'])
 import sys
 import time
 from threading import Thread
@@ -73,6 +73,7 @@ job = Queue()
 def jalan(q):
   while not q.empty():
     targ = q.get()
+    targ = targ.replace('http://', '').replace('https://', '').replace('/', '')
     redup(targ)
     q.task_done()
 

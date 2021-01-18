@@ -73,7 +73,6 @@ job = Queue()
 def jalan(q):
   while not q.empty():
     targ = q.get()
-    targ = targ.replace('http://', '').replace('https://', '').replace('/', '')
     redup(targ)
     q.task_done()
 
